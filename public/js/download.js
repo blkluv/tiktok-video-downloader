@@ -97,7 +97,7 @@ const renderData = (data) => {
     const authorUsernameField = document.getElementById('author_username')
     const authorAvatarField = document.getElementById('author_avatar')
     const authorVideosField = document.getElementById('author_videos')
-    // const authorDetailsField = document.getElementById('author_details')
+    const authorDetailsField = document.getElementById('author_details')
     const videoDownloadField = document.getElementById('video_download')
     const videoDownloadWMField = document.getElementById('video_download_wm')
     const musicDownloadField = document.getElementById('music_download')
@@ -110,7 +110,7 @@ const renderData = (data) => {
     const videoPoster = data['origin_cover']
     const authorName = data['author']['nickname']
     const authorUsername = data['author']['unique_id']
-    // const authorDetails = data['author']['unique_id']
+    const authorDetails = data['author']['unique_id']
     const authorAvatar = data['author']['avatar']
     const authorVideos = "https://www.tiktok.com/@" + data['author']['unique_id']
     const videoDownload = data['play']
