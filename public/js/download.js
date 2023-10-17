@@ -1,24 +1,41 @@
 var BLOBS = {}
+
 var DATA
+
 var RETRIES = {}
 
 const startLoading = () => {
+
     const loader = document.getElementById('overlay_loader')
+
     loader.classList.remove("hidden")
+
 }
+
 const stopLoading = () => {
+
     const loader = document.getElementById('overlay_loader')
+
     loader.classList.add("hidden")
+
 }
+
 const showPageContent = () => {
+
     const container = document.getElementById("container")
+
     container.classList.remove('hidden')
+
 }
+
 const renderOverlayErrorMessage = (msg, secondary_msg = null) => {
+
     const loader = document.getElementById('overlay_loader')
+
     const loaderContent = loader.querySelector('.overlay__content')
 
     const child = document.createElement('div')
+
     child.classList.add("flex", "justify-center", "flex-col", 'items-center')
 
     child.innerHTML = `
@@ -28,108 +45,197 @@ const renderOverlayErrorMessage = (msg, secondary_msg = null) => {
     </g>
     </svg>
     `
+
     child.innerHTML += `<h1 class="text-center text-2xl text-neutral-100">${msg}</h1>`
+
     if (secondary_msg) {
+
         child.innerHTML += `<h1 class="text-center text-lg text-neutral-300">${secondary_msg}</h1>`
+    
     }
+    
     child.innerHTML += `<h1 class="text-center text-lg text-blue-300 hover:text-blue-400"><a href="index.html">return to home page</a></h1>`
 
     loaderContent.replaceChildren(child)
+
 }
+
 const readUrl = () => {
+
     const url = new URL(window.location.href)
+
     const targetUrlValue = url.searchParams.get('url')
+
     if (targetUrlValue === null) {
+
         renderOverlayErrorMessage("Invalid Video URL.")
+
         return false
+
     }
+
     return (targetUrlValue)
+
 }
+
 const makeRequest = () => {
+
     const url = readUrl()
+
     const enpoint = "https://tikwm.com/api/?url="
+
     if (url) {
+
         const reuestURL = enpoint + url
+
         fetch(reuestURL)
+            
             .then((response) => {
+
                 if (response.status >= 200 && response.status <= 299) {
+
                     return response.json()
+
                 } else {
+
                     renderOverlayErrorMessage("Server returned Error code : " + response.status, response.statusText)
+                    
                     return null
+                
                 }
+            
             })
+            
             .then((data) => processResponse(data))
+            
             .catch((e) => {
+                
                 renderOverlayErrorMessage("Error Occurred", e.message)
+                
                 throw e
+            
             })
+    
     }
+
 }
+
 const processResponse = (resJSON) => {
+
     if (!resJSON) { return false }
+
     const resCode = resJSON['code']
+
     const resMsg = resJSON['msg']
+
     if (resCode === -1) {
+
         renderOverlayErrorMessage("Failed to fetch video.", resMsg)
+
     } else if (resCode === 0) {
+
         DATA = resJSON['data']
+
         getMediaBlobs(resJSON['data'])
+
         renderPage(resJSON['data'])
+
         stopLoading()
+
     }
+        
     else {
+
         console.error("UNKNOWN RESPONSE CODE.")
+
         console.log(resJSON)
+
     }
+
 }
+
 const renderPage = (data) => {
+
     renderData(data)
+
     showPageContent()
+
 }
+
 const renderData = (data) => {
 
     const videoContainer = document.getElementById('video_container')
+
     const videoField = videoContainer.querySelector('video')
 
     const videoSourceField = document.getElementById('video_source')
+
     const authorNameField = document.getElementById('author_name')
+
     const authorUsernameField = document.getElementById('author_username')
+
     const authorAvatarField = document.getElementById('author_avatar')
+
     const authorVideosField = document.getElementById('author_videos')
+
     const authorDetailsField = document.getElementById('author_details')
+
     const videoDownloadField = document.getElementById('video_download')
+
     const videoDownloadWMField = document.getElementById('video_download_wm')
+
     const musicDownloadField = document.getElementById('music_download')
+
     const musicCoverField = document.getElementById('music_cover')
+
     const musicTitleField = document.getElementById('music_title')
+
     const musicAuthorField = document.getElementById('music_author')
 
-
     const videoSource = data['play']
+
     const videoPoster = data['origin_cover']
+
     const authorName = data['author']['nickname']
+
     const authorUsername = data['author']['unique_id']
+
     const authorDetails = data['author']['unique_id']
+
     const authorAvatar = data['author']['avatar']
+
     const authorVideos = "https://www.tiktok.com/@" + data['author']['unique_id']
+
     const videoDownload = data['play']
+
     const videoDownloadWM = data['wmplay']
+
     const musicDownload = data['music']
+
     const musicCover = data["music_info"]['cover']
+
     const musicTitle = data["music_info"]['title']
+
     const musicAuthor = data["music_info"]['author']
 
     const videoTitle = data['title']
 
     videoSourceField.src = videoSource
+
     authorNameField.innerText = authorName
+
     authorUsernameField.innerText = authorUsername
+
     // authorDetailsField.innerText = KMBFormat()
+
     authorAvatarField.src = authorAvatar
+
     authorVideosField.href = authorVideos
+
     musicCoverField.src = musicCover
+
     musicTitleField.innerText = musicTitle
+
     musicAuthorField.innerText = musicAuthor
 
     const videoElement = `
@@ -137,112 +243,201 @@ const renderData = (data) => {
         <source id="video_source" src="${videoSource}">
     </video>
     `
+
     videoContainer.replaceChildren()
+
     videoContainer.insertAdjacentHTML("afterbegin", videoElement)
 
 }
+
 const getMediaBlobs = (data) => {
+
     console.log("getting media blobs")
+
     const video = data['play']
+
     const video_wm = data['wmplay']
+
     const music = data['music']
 
     getBlob("video", video)
+
     getBlob("music", music)
+
     getBlob("video_wm", video_wm)
+
 }
+
 const getBlob = (blobKey, url) => {
+
     const xhr = new XMLHttpRequest()
+
     xhr.open("GET", url)
+
     xhr.responseType = 'blob';
+
     xhr.onreadystatechange = function () {
+
         if (this.readyState === this.DONE) {
+
             console.log('DONE: ', this.status);
+
             if (this.status == 200) {
+
                 var blob = new Blob([this.response]);
+
                 console.log("got blob " + blobKey)
+
                 BLOBS[blobKey] = blob
+
             } else {
+
                 console.log("failed to get blob. trying again.")
+
                 !(blobKey in RETRIES) && (RETRIES[blobKey] = 0)
+
                 if (RETRIES[blobKey] < 50) {
+
                     RETRIES[blobKey]++
+
                     getBlob(blobKey, url)
+
                 }
+
             }
+
         }
+
     }
+
     xhr.send()
+
 }
+
 const downloadFileFromBlob = (blobKey, filename, extension) => {
+
     console.log("downloading blob " + blobKey)
+
     const blob = BLOBS[blobKey]
+
     console.log(Boolean(blob))
+
     const url = window.URL.createObjectURL(blob);
+
     const a = document.createElement("a");
 
     a.style = "display: none";
+
     document.body.appendChild(a);
+
     a.href = url;
+
     a.download = filename + extension;
 
     a.click();
+
     console.log(url)
+
     // window.URL.revokeObjectURL(url);
+
     // a.remove()
+
 }
+
 const handleDownloadButtonClick = (button) => {
+
     console.log("clicked button")
+
     const blobKey = button.getAttribute('key')
+
     toggleButtonLoading(button)
+
     waitForBlobToDownload(blobKey, button)
+
 }
+
 const waitForBlobToDownload = (blobKey, button) => {
+
     console.log("looking for blob")
+
     if (!BLOBS.hasOwnProperty(blobKey)) {
+
         console.log("no blob found. recalling ...")
+
         setTimeout(waitForBlobToDownload, 100, blobKey, button)
+
     } else {
+
         console.log("Found blob")
+
         let filename = DATA['author']['unique_id'] + "___" + DATA['title'] + "___"
+
         if (blobKey == "video") {
+
             filename += "NO_WM"
+
             var extension = ".mp4"
+
         } else if (blobKey == "video_wm") {
+
             filename += "WM"
+
             var extension = ".mp4"
+
         } else if (blobKey == "music") {
+
             filename = DATA["music_info"]['author'] + "___" + DATA["music_info"]['title']
+            
             var extension = ".mp3"
+
         }
+
         downloadFileFromBlob(blobKey, filename, extension)
+
         toggleButtonLoading(button)
+
     }
+
 }
+
 const toggleButtonLoading = (button) => {
+
     console.log("toggled button state")
+
     const loader = button.querySelector("#loader")
+
     const text = button.querySelector(".button-content")
+
     const loading = !(loader.classList.contains('hidden'))
 
     loader.classList.toggle('hidden')
+
     text.classList.toggle('opacity-0')
 
     if (loading) {
+
         button.style.pointerEvents = "all"
+
     } else {
+
         button.style.pointerEvents = "none"
+
     }
-}
-const KMBFormat = (num) => {
-    return Intl.NumberFormat('en-US', {
-        notation: "compact",
-        maximumFractionDigits: 1
-    }).format(num)
+
 }
 
+const KMBFormat = (num) => {
+
+    return Intl.NumberFormat('en-US', {
+
+        notation: "compact",
+
+        maximumFractionDigits: 1
+
+    }).format(num)
+
+}
 
 startLoading()
+
 makeRequest()
-
-
