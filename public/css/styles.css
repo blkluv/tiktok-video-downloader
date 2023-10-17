@@ -142,6 +142,8 @@
 
 .faq .faq-desc {
 
+    margin: 0;
+
     padding: 20px 30px;
 
     line-height: 2;
