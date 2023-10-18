@@ -8,9 +8,9 @@
 
     position: relative;
 
-    width: 700px;
+    width: 800px;
 
-    height: 50px;
+    max-width: 100%;
 
     margin-top: 20px;
 
@@ -20,12 +20,22 @@
 
 }
 
+@media screen and (max-width: 767px) {
+
+    .main-form {
+
+        flex-direction: column;
+
+    }
+    
+}
+
 .main-form input,
 .main-form .download-btn {
 
     border-radius: 6px;
 
-    height: 100%;
+    height: 50px;
 
 }
 
@@ -45,6 +55,18 @@
     border: none;
 
     background-color: white;
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .main-form input {
+
+        width: 100%;
+
+        margin-bottom: 15px;
+
+    }
 
 }
 
@@ -68,6 +90,16 @@
 
 }
 
+@media screen and (max-width: 767px) {
+
+    .main-form .download-btn {
+
+        margin: 0 auto;
+
+    }
+
+}
+
 .main-form .download-btn svg {
 
     margin-left: -5px;
@@ -76,9 +108,51 @@
 
 }
 
+.main-form .paste-btn {
+
+    position: absolute;
+
+    right: 180px;
+
+    top: 10px;
+
+    width: 50px;
+
+    height: 30px;
+
+    background-color: #DAE4FE;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #0423ee;
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .main-form .paste-btn {
+
+       right: 15px;
+
+    }
+
+}
+
+.paste-btn.active {
+
+    background-color: #6C6B79;
+
+    color: white;
+
+}
+
 .sec {
 
-    padding: 0;
+    padding: 0 15px;
 
 }
 
@@ -112,9 +186,9 @@
 
 .sec img {
 
-    display: block;
-
     margin: 20px 0;
+
+    display: block;
 
 }
 
@@ -180,6 +254,18 @@
 
 }
 
+@media screen and (max-width: 767px) {
+
+    .faq .faq-question {
+
+        padding: 5px 10px;
+
+        text-align: left;
+
+    }
+
+}
+
 .faq .faq-question .arrow {
 
     width: 10px;
@@ -195,6 +281,16 @@
     transform: rotate(45deg);
 
     transition: .3s ease-in-out;
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .faq .faq-question .arrow {
+
+        margin-left: 15px;
+
+    }
 
 }
 
@@ -224,6 +320,16 @@
 
 }
 
+@media screen and (max-width: 767px) {
+
+    .faq .faq-desc {
+
+        padding: 10px 15px;
+
+    }
+
+}
+
 .faq .faq-question.active + .outer {
 
     max-height: 1000px;
@@ -234,7 +340,7 @@
 
     border-top: 1px solid #ccc;
 
-    padding: 30px 0;
+    padding: 30px 15px;
 
     background-color: #F3F4F6;
 
@@ -246,9 +352,31 @@
 
 }
 
+@media screen and (max-width: 767px) {
+
+    .footer .foots {
+
+        flex-direction: column;
+
+        row-gap: 20px;
+
+    }
+
+}
+
 .footer .foot {
 
     width: 33.6666667%;
+
+}
+
+@media screen and (max-width: 767px) {
+
+    .footer .foot {
+    
+        width: 100%;
+
+    }
 
 }
 

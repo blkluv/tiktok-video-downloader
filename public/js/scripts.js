@@ -23,3 +23,39 @@ faqQuestionEl.forEach(btn => {
     });
 
 });
+
+pasteBtn.addEventListener("click", async (event) => {
+
+    event.preventDefault();
+
+    if (event.target.classList.contains("active")) {
+
+        pasteIput.value = "";
+
+        pasteIput.focus();
+
+        event.target.classList.remove("active");
+
+        event.target.innerText = "Paste";
+
+    } else {
+
+        try {
+
+            const text = await navigator.clipboard.readText();
+
+            pasteIput.value = text;
+
+            event.target.classList.add("active");
+
+            event.target.innerText = "Clear";
+
+        } catch (err) {
+
+            console.error('Failed to copy!', err);
+
+        }
+        
+    }
+
+});
