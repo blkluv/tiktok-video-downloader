@@ -85,23 +85,28 @@
 
                 </div>
 
-                <form action="download.html" method="GET"
-                    class="w-full h-8 lg:h-10 lg:max-w-lg max-w-xs my-3 flex rounded-md ring ring-sky-600 dark:ring-red-400 bg-sky-600 dark:bg-red-400 group ">
+                <form action="download.html" method="GET" class="main-form">
 
-                    <input type="text" name="url" placeholder="Tiktok link" required
-                        class="clear-css w-full grow h-full rounded-tl-md rounded-bl-md px-6 bg-white">
+                    <input type="text" id="paste-input" name="url" placeholder="Paset Tiktok link Here" required>
 
-                    <button type="submit"
-                        class="bg-sky-600 dark:bg-red-400 h-full w-10 lg:w-12 rounded-tr-md rounded-br-md">
+                    <button type="submit" class="download-btn">
 
-                        <svg class="w-full h-1/2 fill-white dark:fill-neutral-100" xmlns="http://www.w3.org/2000/svg"
-                            xml:space="preserve" width="298" height="512" shape-rendering="geometricPrecision"
-                            text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd"
-                            clip-rule="evenodd" viewBox="0 0 298 511.93">
-                            <path fill-rule="nonzero"
-                                d="M70.77 499.85c-16.24 16.17-42.53 16.09-58.69-.15-16.17-16.25-16.09-42.54.15-58.7l185.5-185.03L12.23 70.93c-16.24-16.16-16.32-42.45-.15-58.7 16.16-16.24 42.45-16.32 58.69-.15l215.15 214.61c16.17 16.25 16.09 42.54-.15 58.7l-215 214.46z" />
+                        <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        
+                            <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                        
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                        
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M6.46967 13.9697C6.17678 14.2626 6.17678 14.7374 6.46967 15.0303L11.4697 20.0303C11.7626 20.3232 12.2374 20.3232 12.5303 20.0303L17.5303 15.0303C17.8232 14.7374 17.8232 14.2626 17.5303 13.9697C17.2374 13.6768 16.7626 13.6768 16.4697 13.9697L12.75 17.6893L12.75 9.5C12.75 8.78668 12.9702 7.70001 13.6087 6.81323C14.2196 5.96468 15.2444 5.25 17 5.25C17.4142 5.25 17.75 4.91421 17.75 4.5C17.75 4.08579 17.4142 3.75 17 3.75C14.7556 3.75 13.2804 4.70198 12.3913 5.93677C11.5298 7.13332 11.25 8.54665 11.25 9.5L11.25 17.6893L7.53033 13.9697C7.23744 13.6768 6.76256 13.6768 6.46967 13.9697Z"
+                                    fill="#ffffff" />
+                            </g>
+                        
                         </svg>
 
+                        Download
+                    
                     </button>
 
                 </form>

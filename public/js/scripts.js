@@ -1,5 +1,9 @@
 const faqQuestionEl = document.querySelectorAll(".faq-question");
 
+const pasteBtn = document.getElementById("paste-btn");
+
+const pasteIput = document.getElementById("paste-input");
+
 faqQuestionEl.forEach(btn => {
 
     btn.addEventListener("click", (event) => {
