@@ -1,28 +1,27 @@
-<urlset>
+<?xml version="1.0" encoding="UTF-8"?> 
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
 <url>
-<loc>http://tiktoksdownloader.com/./</loc>
-<changefreq>always</changefreq>
+  <loc>http://tiktoksdownloader.com/./</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-<loc>http://tiktoksdownloader.com/about.html</loc>
-<changefreq>always</changefreq>
+  <loc>http://tiktoksdownloader.com/about.html</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-<loc>http://tiktoksdownloader.com/terms-of-service.html</loc>
-<changefreq>always</changefreq>
+  <loc>http://tiktoksdownloader.com/terms-of-service.html</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-<loc>http://tiktoksdownloader.com/privacy-policy.html</loc>
-<changefreq>always</changefreq>
+  <loc>http://tiktoksdownloader.com/privacy-policy.html</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-<loc>http://tiktoksdownloader.com/how-to.html</loc>
-<changefreq>always</changefreq>
+  <loc>http://tiktoksdownloader.com/how-to.html</loc>
+  <changefreq>always</changefreq>
 </url>
 <url>
-<loc>
-https://tiktoksdownloader.com/?fbclid=IwAR3RJJjoxpz6TqssVG-XJbXzvLNteaCw3mbbgONvMFHC3F06f5MunFiTAlM
-</loc>
-<changefreq>always</changefreq>
+  <loc>https://tiktoksdownloader.com/?fbclid=IwAR3RJJjoxpz6TqssVG-XJbXzvLNteaCw3mbbgONvMFHC3F06f5MunFiTAlM</loc>
+  <changefreq>always</changefreq>
 </url>
 </urlset>
