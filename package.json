@@ -1,5 +1,5 @@
 {
-  "name": "tiktok-downloader",
+  "name": "ttdown",
   "version": "1.0.0",
   "description": "",
   "main": "onrequest.js",
